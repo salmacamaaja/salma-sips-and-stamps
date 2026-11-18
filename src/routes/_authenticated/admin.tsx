@@ -132,6 +132,11 @@ function ReportTab() {
           <h2 className="text-2xl font-semibold">Penjualan Mingguan</h2>
           <span className="text-xs text-muted-foreground">Total {formatRupiah(report.totalRevenue)}</span>
         </div>
+        {report.weekRevenue === 0 ? (
+          <p className="mt-4 flex h-44 items-center justify-center rounded-2xl bg-secondary text-sm text-muted-foreground">
+            Belum ada penjualan minggu ini.
+          </p>
+        ) : (
         <div className="mt-4 h-44">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={report.days}>
@@ -145,6 +150,7 @@ function ReportTab() {
             </BarChart>
           </ResponsiveContainer>
         </div>
+        )}
       </section>
 
       <section className="rounded-3xl bg-card p-5 shadow-soft">
