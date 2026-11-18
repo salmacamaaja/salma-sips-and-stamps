@@ -28,3 +28,11 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Mobile-first web app: every page renders inside `MobileShell` (phone-width column, bottom nav, `© salma` footer) so it behaves like a native Android/iOS app.
+- Order prices are computed in the database function `place_order` from `menu_items`; the client only sends item ids, quantities and topping names, so prices cannot be tampered with.
+- Points are awarded by the `orders` update trigger when status becomes `selesai`; never add points from client code.
+- Roles live in `user_roles` and are checked with `has_role`; the admin page gates in `beforeLoad` via `isAdminQuery`.
+- Menu photos uploaded by admins are compressed in the browser and stored as data URLs in `menu_items.image_url` because public storage buckets are blocked; seeded photos live in `public/images/menu/`.
+- Cart lives in localStorage (`src/lib/cart.tsx`); orders, menu and profiles live in Lovable Cloud.
